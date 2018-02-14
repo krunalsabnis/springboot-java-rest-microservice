@@ -1,0 +1,23 @@
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/qualibrate?useSSL=false&rewriteBatchedStatement=trye&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: "root"
+    validation-query: SELECT 1
+    test-on-borrow: true
+  jpa:
+    hibernate:
+      dialect: org.hivernate.dialect.MySQL5Dialect
+      ddl-auto: none
+    show-sql: true
+---
+spring:
+  profiles: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:qualibrate;MODE=MySQL
+  jpa:
+    show-sql: true
