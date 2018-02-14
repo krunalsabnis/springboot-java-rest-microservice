@@ -1,0 +1,4 @@
+# append new changeset at the end
+  databaseChangeLog:
+    - include:
+        file: db/changelog/changelog-project-table.yaml
