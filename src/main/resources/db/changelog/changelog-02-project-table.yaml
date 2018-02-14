@@ -32,8 +32,6 @@
               name: active
               type: boolean
           - column:
-              constraints:
-                nullable: false
               name: user_id
               type: BIGINT
           - column:

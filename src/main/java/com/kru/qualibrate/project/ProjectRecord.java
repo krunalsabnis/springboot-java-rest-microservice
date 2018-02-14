@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class ProjectRecord {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 	
 	@NotNull
@@ -39,8 +41,15 @@ public class ProjectRecord {
 
 	private Date modifiedAt;
 
-	@Column(name = "user_id")
+	@Column(name="user_id")
 	private Long userId;
 
-
+	ProjectRecord(Project project) {
+		this.setName(project.getName());
+		this.setDescription(project.getDescription());
+		this.setIcon(project.getIcon());
+		this.setModifiedAt(new Date());
+		this.setActive(project.isActive());
+		this.setCode(project.getCode());
+	}
 }
