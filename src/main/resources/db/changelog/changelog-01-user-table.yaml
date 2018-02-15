@@ -51,15 +51,9 @@
               name: logout_at
               type: DATETIME
           - column:
-              name: modified_at
+              name: timestamp
               type: DATETIME
-              defaultValueComputed: CURRENT_TIMESTAMP             
-      - createIndex:
-          indexName: user-id-index
-          tableName: user
-          columns:
-          - column:
-              name: user_id
+              defaultValueComputed: CURRENT_TIMESTAMP
           
   - changeSet:
       id: user-table-add-unique-constraint

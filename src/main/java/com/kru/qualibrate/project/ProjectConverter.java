@@ -11,19 +11,20 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class ProjectConverter implements Converter<ProjectRecord, Project> {
+public class ProjectConverter implements Converter<ProjectRecord, ProjectDTO> {
 
 
 	@Override
-	public Project convert(ProjectRecord source) {
-		Project p = new Project();
+	public ProjectDTO convert(ProjectRecord source) {
+		ProjectDTO p = new ProjectDTO();
 		p.setId(source.getId());
 		p.setName(source.getName());
-		p.setCode(source.getCode());
 		p.setDescription(source.getDescription());
+		p.setCode(source.getCode());
 		p.setIcon(source.getIcon());
-		p.setModifiedAt(source.getModifiedAt());
 		p.setActive(source.isActive());
+		p.setTimestamp(source.getTimestamp());
+		p.setUserId(source.getUserId());
 		return p;
 	}
 

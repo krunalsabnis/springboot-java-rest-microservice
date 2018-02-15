@@ -5,8 +5,6 @@ package com.kru.qualibrate.project;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class ProjectConverterTest {
 	@Test
 	public void verifyEntityToDTO() {
 		ProjectRecord p = Util.buildProjectRecord();
-		Project dto = projectConverter.convert(p);
+		ProjectDTO dto = projectConverter.convert(p);
 		assertNotNull(dto);
 		assertEquals(dto.getCode(), p.getCode());
 		assertEquals(dto.getDescription(), p.getDescription());
