@@ -4,9 +4,15 @@
 package com.kru.qualibrate.project;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kru.qualibrate.exceptions.InvalidRequestException;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
+@Slf4j
 public class ProjectService {
 	
 	@Autowired
@@ -23,13 +30,21 @@ public class ProjectService {
 	@Autowired
 	private ProjectConverter projectConverter;
 	
-	public Page<Project> getProject(Pageable pageable) {
-		//return projectRepo.findAll(pageable).map(ProjectRecord::toProjectDTO);
+	public Page<ProjectDTO> getProject(Pageable pageable) {
 		return projectRepo.findAll(pageable).map(projectConverter);
 	}
 
-	public Project createProject(Project project) {
-		return projectConverter.convert(projectRepo.save(new ProjectRecord(project)));
+	@Transactional
+	public ProjectDTO createProject(Project project) {
+		ProjectRecord saved;
+		try {
+			saved = projectRepo.save(new ProjectRecord(project));
+		} catch (DataIntegrityViolationException e) {
+			log.error("project with code {} already exists", project.getCode());
+			throw new InvalidRequestException(e, "error creating new project."
+					+ " code must be unique");
+		}
+		return projectConverter.convert(saved);
 	}
 
 }

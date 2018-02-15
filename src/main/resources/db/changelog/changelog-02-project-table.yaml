@@ -16,19 +16,19 @@
               constraints:
                 nullable: false
               name: name
-              type: VARCHAR(20)                        
+              type: VARCHAR(20)
           - column:
               name: description
-              type: VARCHAR(20)                        
+              type: LONGTEXT
           - column:
               name: code
-              type: VARCHAR(20)                        
+              type: VARCHAR(20)
           - column:
               name: icon
-              type: VARCHAR(20)                        
+              type: VARCHAR(20)
           - column:
               constraints:
-                nullable: false          
+                nullable: false 
               name: active
               type: boolean
           - column:
@@ -37,8 +37,16 @@
           - column:
               constraints:
                 nullable: false
-              name: modified_at
+              name: timestamp
               type: DATETIME
               defaultValueComputed: CURRENT_TIMESTAMP
 
+  - changeSet:
+      id: project-table-add-unique-constraint
+      author: krunalsabnis@gmail.com
+      changes:
+        - addUniqueConstraint:
+            columnNames: code
+            constraintName: unique-code-constraint
+            tableName: project
               

@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -39,17 +41,18 @@ public class ProjectRecord {
 
 	private boolean active;
 
-	private Date modifiedAt;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date timestamp;
 
 	@Column(name="user_id")
 	private Long userId;
 
 	ProjectRecord(Project project) {
-		this.setName(project.getName());
-		this.setDescription(project.getDescription());
-		this.setIcon(project.getIcon());
-		this.setModifiedAt(new Date());
-		this.setActive(project.isActive());
-		this.setCode(project.getCode());
+		this.name = project.getName();
+		this.description = project.getDescription();
+		this.timestamp = new Date();
+		this.active = project.isActive();
+		this.code = project.getCode();
+		this.id = project.getId();
 	}
 }

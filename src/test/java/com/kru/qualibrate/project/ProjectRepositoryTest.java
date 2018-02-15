@@ -26,11 +26,11 @@ public class ProjectRepositoryTest extends QualibrateJavaApiApplicationTests {
 		ProjectRecord savedEntity = projectRepository.save(newEntity);
 		assertEquals(savedEntity.getCode(), newEntity.getCode());
 		assertEquals(savedEntity.getIcon(), newEntity.getIcon());
-		assertNotNull(savedEntity.getModifiedAt());
+		assertNotNull(savedEntity.getTimestamp());
 
 		ProjectRecord readEntity = projectRepository.getOne(savedEntity.getId());
 		assertNotNull(readEntity);
 		
-		assertNull(projectRepository.findOne(2L));
+		assertNull(projectRepository.findOne(2345L));
 	}
 }
