@@ -91,13 +91,14 @@ public class UserControllerTest extends ControllerTest {
     }
     
     /**
-     * Verify there is no more entities to return in page 1, size 10 
+     * Verify there is no more entities to return in page 100, size 2500
+     * we load 25 records in H2 in test profile
      * 
      */
     @Test
     public void cVerifyUserGetForEmptyResponse() {
      	ResponseEntity<RestResponsePage<UserDTO>> response = restTemplate
-     			.exchange(createURLWithPort("/api/v1/user?page=1&size=10"),
+     			.exchange(createURLWithPort("/api/v1/user?page=100&size=2500"),
     			HttpMethod.GET, entity, responseType);
     	responseType = new ParameterizedTypeReference<RestResponsePage<UserDTO>>(){};
 
@@ -114,8 +115,8 @@ public class UserControllerTest extends ControllerTest {
 	@Test
     public void dVerifyConstraintViolates() {
 		User u = new User.UserBuilder()
-				.firstName("fist_name")
-				.lastName("last_name")
+				.firstName("Krunal")
+				.lastName("Sabnis")
 				.email("email@test.com")
                 .build();
 		HttpEntity<User> entity = new HttpEntity<User>(u, headers);
@@ -157,6 +158,7 @@ public class UserControllerTest extends ControllerTest {
 	/**
 	 * Verify UPDATE for User
 	 * Get list of users pick one and Update.
+	 * also test UPDATE for Bad Request
 	 *
 	 */
 	@Test
@@ -170,16 +172,24 @@ public class UserControllerTest extends ControllerTest {
 		String currentLastName = user.getLastName();
 		
 		//update user's name
-		user.setFirstName(currentFirstName + "-done");
-		user.setLastName(currentLastName + "-done");
+		user.setFirstName(currentFirstName + "changed");
+		user.setLastName(currentLastName + "changed");
+
 		HttpEntity<User> entity = new HttpEntity<User>(user, headers);
 
         ResponseEntity<UserDTO> result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + user.getUserId()),
         		HttpMethod.PUT, entity, UserDTO.class);
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         
-        assertEquals(currentFirstName + "-done", result.getBody().getFirstName());
-        assertEquals(currentLastName + "-done", result.getBody().getLastName());
+        assertEquals(currentFirstName + "changed", result.getBody().getFirstName());
+        assertEquals(currentLastName + "changed", result.getBody().getLastName());
+        
+        // test for a bad request parameter - invalid name
+        user.setFirstName("namewith-hyphen");
+        entity = new HttpEntity<User>(user, headers);
+        result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + user.getUserId()),
+        		HttpMethod.PUT, entity, UserDTO.class);
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
 	}
 
 	/**
@@ -228,11 +238,5 @@ public class UserControllerTest extends ControllerTest {
 		ResponseEntity<UserDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
         		HttpMethod.POST, entity, UserDTO.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-
-        // also test for PUT
-		response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
-        		HttpMethod.PUT, entity, UserDTO.class);
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-
     }
 }

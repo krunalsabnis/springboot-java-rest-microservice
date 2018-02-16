@@ -3,7 +3,7 @@
       id: load-test-data-in-project-table
       author: krunalsabnis@gmail.com
       runOnChange: true
-      context: "test11"
+      context: "test"
       changes:
         - delete:
             tableName: project
