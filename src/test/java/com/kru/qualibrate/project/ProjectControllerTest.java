@@ -92,7 +92,7 @@ public class ProjectControllerTest extends ControllerTest {
 	@Test
 	public void cVerifyProjectGetForEmptyResponse() {
 		ResponseEntity<RestResponsePage<ProjectDTO>> response = restTemplate
-				.exchange(createURLWithPort("/api/v1/project?page=1&size=10"), HttpMethod.GET, entity, responseType);
+				.exchange(createURLWithPort("/api/v1/project?page=100&size=100"), HttpMethod.GET, entity, responseType);
 		responseType = new ParameterizedTypeReference<RestResponsePage<ProjectDTO>>() {
 		};
 
