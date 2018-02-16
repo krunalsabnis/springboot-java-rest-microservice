@@ -5,6 +5,8 @@ package com.kru.qualibrate.project;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +26,28 @@ public class ProjectConverterTest {
 	
 	@Test
 	public void verifyEntityToDTO() {
-		ProjectRecord p = Util.buildProjectRecord();
-		ProjectDTO dto = projectConverter.convert(p);
+		Project p = new Project.ProjectBuilder()
+                .active(false)
+                .code("PROJ-CODE-1")
+                .description("PROJ-Description-1")
+                .name("PROJ-NAME-1")
+                .build();
+		Date timestamp = new Date();
+		ProjectRecord pr = new ProjectRecord(p);
+		pr.setId(100L);
+		pr.setActive(true);
+		pr.setTimestamp(timestamp);
+
+		ProjectDTO dto = projectConverter.convert(pr);
+		
 		assertNotNull(dto);
-		assertEquals(dto.getCode(), p.getCode());
-		assertEquals(dto.getDescription(), p.getDescription());
-		assertEquals(dto.getIcon(), p.getIcon());
-		assertEquals(dto.getId(), p.getId());
-		assertEquals(dto.getCode(), p.getCode());
-		assertEquals(dto.getName(), p.getName());
-		assertFalse(dto.isActive());
+		assertEquals(dto.getCode(), pr.getCode());
+		assertEquals(dto.getDescription(), pr.getDescription());
+		assertEquals(dto.getId(), pr.getId());
+		assertEquals(dto.getCode(), pr.getCode());
+		assertEquals(dto.getName(), pr.getName());
+		assertEquals(dto.getId(), pr.getId());
+		assertEquals(dto.getTimestamp(), pr.getTimestamp());
+		assertTrue(dto.isActive());
 	}
 }

@@ -3,6 +3,8 @@
  */
 package com.kru.qualibrate.project;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +26,11 @@ import io.swagger.annotations.ApiOperation;
  * 
  * Controller for Project Entity
  */
-
+@Validated
 @RestController
 @RequestMapping("/api/v1/")
 @Api(description = "Project lifecycle and test asset administration",
 tags = "projects", consumes = "application/json")
-@Validated
 public class ProjectController {
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class ProjectController {
 	@ApiOperation(value = "Create a Project", notes = "Create Project")
 	@RequestMapping(method = RequestMethod.POST, value = "/project")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ProjectDTO createProject(@RequestBody Project project) {
+	public ProjectDTO createProject(@Valid @RequestBody Project project) {
 		return projectService.createProject(project);
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kru.qualibrate.exceptions.InvalidRequestException;
+import com.kru.qualibrate.exceptions.ResourceNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,4 +48,17 @@ public class ProjectService {
 		return projectConverter.convert(saved);
 	}
 
+	@Transactional
+	public ProjectDTO assignToUser(Long userId, Long projectId) {
+		ProjectRecord p = findOne(projectId);
+		p.setUserId(userId);
+		return projectConverter.convert(projectRepo.save(p));
+	}
+
+	private ProjectRecord findOne(Long projectId) {
+		ProjectRecord p = projectRepo.findOne(projectId);
+		if (p == null)
+			throw new ResourceNotFoundException("Project id " + projectId + "does not exists.");
+		return p;
+	}
 }

@@ -21,7 +21,6 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-	maven { url 'https://jitpack.io' }
 }
 
 
@@ -43,8 +42,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('com.github.blocoio:faker:1.0.1')
-	testCompile('org.databene:feed4junit:1.2.0')
 	testRuntime 'com.h2database:h2:1.4.190'
 
 }
