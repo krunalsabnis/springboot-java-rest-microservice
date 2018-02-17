@@ -4,16 +4,33 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven {
+		  url 'https://plugins.gradle.org/m2/'
+		  url 'https://repo.spring.io/libs-snapshot'
+		 }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.asciidoctor:asciidoctorj:1.5.3'
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.7"
 	}
 }
 
+plugins {
+  id 'org.asciidoctor.convert' version '1.5.3'
+}
+
+
+
+  
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+
+
+
 
 group = 'com.kru'
 version = '0.0.1-SNAPSHOT'
@@ -23,7 +40,9 @@ repositories {
 	mavenCentral()
 }
 
-
+ext {
+  snippetsDir = file('build/generated-snippets')
+}
 
 dependencies {
     compile 'io.springfox:springfox-swagger2:2.4.0'
@@ -39,16 +58,39 @@ dependencies {
 
 	runtime 'mysql:mysql-connector-java:5.1.34'
 
-	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.springframework.boot:spring-boot-starter-web'
+    compile "org.asciidoctor:asciidoctor-gradle-plugin:1.5.7"
+    
+    //asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:1.5.7'
+    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.2.1.RELEASE'
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 	testRuntime 'com.h2database:h2:1.4.190'
+    testCompile group: 'org.springframework.restdocs', name: 'spring-restdocs-core', version: '1.2.1.RELEASE'
 
 }
 
 
+jar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}") {
+        into 'public/docs'
+    }
+}
+
+
 test {
+    outputs.dir snippetsDir
+    
     testLogging {
         events "passed", "skipped", "failed"
     }
+}
+
+asciidoctor {
+    attributes 'snippets': snippetsDir
+    inputs.dir snippetsDir
+    outputDir = file("site")
+    dependsOn test
+    backends('html5', 'pdf')
 }

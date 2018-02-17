@@ -1,0 +1,111 @@
+= Qualibrate API Guide
+Demo API
+{project-version}
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[overview]]
+= Overview
+
+These APIs are for demo purpose only. This APIs allows clients to let create and manage two entities that is User and Project.
+
+
+[[getting-started]]
+== Getting Started
+
+This APIs are under development and you can follow this page for more details.
+You can contact me at link:mailto:krunalsabnis@gmail.com[email].
+
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+These APIs adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to create a new resource with a known id
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+These APIs tries to adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource or delete has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+
+| `500 Internal Server Error`
+| An error occurred while processing the request
+|===
+
+
+
+= Resources
+
+
+[[resources-user]]
+== Users
+
+User is an user signed up on this platform. User can signup by authentication process (TBD).
+On successful signup user is created. This API accepts paginated request and response contains list of users.
+
+
+=== Resource Structure
+
+include::{snippets}/user-controller-mock-service-test/get-users-list/1/response-fields.adoc[]
+
+
+[[get-users-list]]
+=== Listing Users
+
+A `GET` request will be used to get existing users of the system. This API method always returns a `200 OK`
+response. If no user exists, null values are returned.
+
+
+==== Resource URI
+
+[source]
+/api/v1/user/
+
+==== Example request
+
+include::{snippets}/user-controller-mock-service-test/get-users-list/1/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/user-controller-mock-service-test/get-users-list/1/http-response.adoc[]
+
