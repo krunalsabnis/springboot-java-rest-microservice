@@ -1,0 +1,28 @@
+version: '3'
+
+services: 
+  docker-mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=qualibrate
+  qualibrate-rest-api-dev:
+    build:
+      context: .
+      dockerfile: ApiDockerfile
+    depends_on:
+      - docker-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=docker-mysql
+      - SPRING_PROFILES_ACTIVE=dev
+  api-doc-ngnix:
+    build:
+      context: .
+      dockerfile: ApiDocDockerfile
+    depends_on:
+      - qualibrate-rest-api-dev
+    ports:
+      - 8085:80
+
