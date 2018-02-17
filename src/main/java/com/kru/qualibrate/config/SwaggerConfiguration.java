@@ -25,10 +25,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
  *
  * Configuration class for customizing Swagger Page Docket
+ * 
+ * reference : https://github.com/springfox/springfox/issues/755
  */
-
-
-// reference : https://github.com/springfox/springfox/issues/755
 
 
 @Configuration

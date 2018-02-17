@@ -9,6 +9,17 @@ import org.springframework.beans.BeanWrapperImpl;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
+/**
+ * A utility to copy properties from one object to another.
+ * Irrespective of Type of Objects, it copies all properties with same name.
+ * It does not assign NULL properties from source hence target property is not erased.
+ *
+ * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
+ *
+ * @param <T> target object to copy into
+ * @param <S> source object to copy from
+ */
+
 public class NonNullCopyBeanUtils<T, S> {
     public T copyNonNullProperties(T target, S in) {
         if (in == null || target == null) return null;

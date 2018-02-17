@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
+ * Custom Exception handler for 404 Not found. 
+ *
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
  *
  */
