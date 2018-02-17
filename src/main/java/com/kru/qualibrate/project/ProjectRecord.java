@@ -44,6 +44,7 @@ public class ProjectRecord {
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date timestamp;
 
+	// due to hibernate convention set db column name on foreign key
 	@Column(name="user_id")
 	private Long userId;
 

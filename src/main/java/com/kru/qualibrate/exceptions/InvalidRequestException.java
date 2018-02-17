@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
+ * Custom Exception handler to provide more meaningful message
+ * and wrap validation errors into 400 Bad Request 
+ *
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
  *
  */
