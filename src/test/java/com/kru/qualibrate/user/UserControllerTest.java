@@ -30,7 +30,7 @@ import com.kru.qualibrate.RestResponsePage;
  * REST Controller Test Cases for User Entity
  * sequence of test case is important hence MethodSorters.NAME_ASCENDING
  */
-
+@SuppressWarnings("unchecked")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserControllerTest extends ControllerTest {
 	
@@ -52,7 +52,7 @@ public class UserControllerTest extends ControllerTest {
      * Test POST with valid Request. Then do  GET for USER
      * posts 10 parallel requests to run it quicker
      */
-    @Test
+	@Test
     public void aVerifyUserPost() {
     	int requestNumbers = 10;
     	IntStream.range(65, requestNumbers).parallel().forEach(x -> {
@@ -62,8 +62,7 @@ public class UserControllerTest extends ControllerTest {
     				.email("email-" + (char)x + "@email.com")
                     .build();
     		HttpEntity<User> entity = new HttpEntity<User>(u, headers);
-        	ResponseEntity<User> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
-        			HttpMethod.POST, entity, User.class);
+        	ResponseEntity<User> response = post("/api/v1/user", entity, User.class);
             assertNotNull(response);
             assertEquals(HttpStatus.CREATED, response.getStatusCode());
     	});
@@ -120,13 +119,13 @@ public class UserControllerTest extends ControllerTest {
 				.email("email@test.com")
                 .build();
 		HttpEntity<User> entity = new HttpEntity<User>(u, headers);
-        
-		ResponseEntity<UserDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
-        		HttpMethod.POST, entity, UserDTO.class);
+		ResponseEntity<UserDTO> response = post("/api/v1/user", entity, UserDTO.class);
+		/*ResponseEntity<UserDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
+        		HttpMethod.POST, entity, UserDTO.class);*/
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         
         // duplicate save attempt
-        response = restTemplate.exchange(createURLWithPort("/api/v1/user"), HttpMethod.POST, entity, UserDTO.class);
+        response = post("/api/v1/user", entity, UserDTO.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 	
@@ -144,13 +143,11 @@ public class UserControllerTest extends ControllerTest {
     	Long userId = response.getBody().getContent().get(0).getUserId();
 
         // delete random user with id = userId
-        ResponseEntity<UserDTO> result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + userId),
-        		HttpMethod.DELETE, entity, UserDTO.class);
+        ResponseEntity<UserDTO> result = delete("/api/v1/user/" + userId, entity, UserDTO.class);
         assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
-       
+
         // verify user with id = userId deleted
-        result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + userId),
-        		HttpMethod.GET, entity, UserDTO.class);
+        result = get("/api/v1/user/" + userId, entity, UserDTO.class);
 
         assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
 	}
@@ -177,8 +174,8 @@ public class UserControllerTest extends ControllerTest {
 
 		HttpEntity<User> entity = new HttpEntity<User>(user, headers);
 
-        ResponseEntity<UserDTO> result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + user.getUserId()),
-        		HttpMethod.PUT, entity, UserDTO.class);
+        ResponseEntity<UserDTO> result = put("/api/v1/user/" + user.getUserId(),
+        		entity, UserDTO.class);
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         
         assertEquals(currentFirstName + "changed", result.getBody().getFirstName());
@@ -187,8 +184,7 @@ public class UserControllerTest extends ControllerTest {
         // test for a bad request parameter - invalid name
         user.setFirstName("namewith-hyphen");
         entity = new HttpEntity<User>(user, headers);
-        result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + user.getUserId()),
-        		HttpMethod.PUT, entity, UserDTO.class);
+        result = put("/api/v1/user/" + user.getUserId(), entity, UserDTO.class);
         assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
 	}
 
@@ -216,8 +212,7 @@ public class UserControllerTest extends ControllerTest {
 		
 		HttpEntity<UserDTO> entity = new HttpEntity<UserDTO>(user, headers);
 
-        ResponseEntity<UserDTO> result = restTemplate.exchange(createURLWithPort("/api/v1/user/" + validUserId),
-        		HttpMethod.PUT, entity, UserDTO.class);
+        ResponseEntity<UserDTO> result = put("/api/v1/user/" + validUserId, entity, UserDTO.class);
         assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
     }
 
@@ -235,8 +230,7 @@ public class UserControllerTest extends ControllerTest {
                 .build();
 		HttpEntity<User> entity = new HttpEntity<User>(u, headers);
         
-		ResponseEntity<UserDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
-        		HttpMethod.POST, entity, UserDTO.class);
+		ResponseEntity<UserDTO> response = post("/api/v1/user", entity, UserDTO.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }

@@ -1,9 +1,16 @@
 FROM java:8
 
-VOLUME /tmp
+#VOLUME /tmp
 
 EXPOSE 8080
-
-ADD /build/libs/qualibrate-java-api-*.jar app.jar
-
-ENTRYPOINT ["java","-jar","app.jar"]
+ENV DBHOST=$DBHOST
+COPY /build/libs/qualibrate-java-api-*.jar app.jar
+COPY /scripts/wait-for-it.sh /wait-for-it.sh
+COPY /scripts/run.sh /run.sh
+RUN chmod +x /run.sh
+RUN chmod +x /wait-for-it.sh
+#RUN chmod +x $PATH/wait-for-db.sh
+CMD echo "DB-HOST ====@################### "$DBHOST DBHOST
+#CMD sleep 1000
+#ENTRYPOINT ["/wait-for-it.sh", "$DBHOST:3306","--","java","-jar","app.jar"]
+ENTRYPOINT ["/run.sh"]
