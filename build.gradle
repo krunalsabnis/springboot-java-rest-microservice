@@ -104,7 +104,7 @@ test {
 
 //======== task for generating asciidoc for API guide ========//
 
-/*
+
 asciidoctor {
     attributes 'snippets': snippetsDir
     inputs.dir snippetsDir
@@ -113,8 +113,8 @@ asciidoctor {
     backends('html5', 'pdf')
 }
 
-*/
-//======== task for generating docker image with every build ========//
+
+//======== task for generating docker image with every build - not in use as of now ========//
 /*
 task buildDocker (type:Docker, dependsOn: build) {
 	applicationName = jar.baseName
