@@ -9,6 +9,7 @@ CI/CD : Using Travis for CI/CD : (Currently it runs only builds on every commit 
 ## Minimum Prerequisites
 
 * Java 8 SDK
+* MySQL 5.7.21 running on port 3306 with an existing DB schema as "qualibrate"
 
 ## Build
 
@@ -17,45 +18,60 @@ Build process includes,
 * StyleCheck (in process)
 * Code Quality Check (in process)
 * asciidoc doc job to generate API documentation
+* build executable jar of spring-boot app
 
 There are two ways you can build the project.
 Both are one command build only.
 
-1. once you clone this repository, in project root folder execute below command.
+1. Build in your local environment
+once you clone this repository, in project root folder execute below command.
 
 ```
 > ./gradlew build
+
 ```
 Note : For Windows environment asciidoc sometimes gives warning (due to a bug with Ruby)
-and shows that build is failed which is really not.
-Hence, i recommend to use second approach below
+and shows that build is failed which really has not. Hence, i recommend to use second approach below using docker image based on Linux
 
-2. User Docker as Build machine.
-This app needs Java 8 to build and JRE 8 for runtime. I have created this simple docker build machine based on Official Java 8 image.
+2. Use Docker as Build machine.
+This app needs Java 8 to build and JRE 8 for runtime. I have created a simple docker build machine based on official Java 8 image.
 
-If you have docker installed then execute below command.
-There are two parameters to specify. 
+Make sure your docker environment is already setup.
+
+You need to run a docker image and pass two parameters as below
+
 1. Git URL : in this case its same as this repository's URL
-2. Docker's path for mounted volume. so make sure you mount a volume and specify the path
+2. Docker's path : for mounted volume. so make sure you mount a volume and specify the path
+
+Command to build using docker build machine
 
 ```
 docker run --name {name-for-your-container} -e GIT_REPO_URL='https://github.com/krunalsabnis/qualibrate-java-api.git' -e DOCKER_PATH='{path-on-container-filesystem where git will clone and gradle build is run}' -i -v {your-local-dir}:{path-on-container-filesystem} krunalsabnis/spring-java-build:latest
 ```
 
-[You can retrigger build many time for any project.For more details Please refer  https://hub.docker.com/r/krunalsabnis/spring-java-build/]
+You should be able to see build progress on console. Once done the build docker container remains running unless you stop it. 
+[For more details Please refer  https://hub.docker.com/r/krunalsabnis/spring-java-build/]
 
 
 
 ## Run
 
-To Run the project run the following command:
+This app can be run in two ways.
 
 1. Run as standalone spring-boot application
+Make sure your local instance of MySQL is running on port 3306 and already has DB with name as "qualibrate".
+
 ```
 > ./gradlew bootRun
 OR
-> java -jar build/libs/qualibrate-java-api-0.0.1-SNAPSHOT.jar
+> java -jar  ./build/libs/qualibrate-java-api-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
 ```
+|profile|database|load dummy data|port|db name|
+-----------------------------------------------
+|none = default| MySQL| N|3306|qualibrate|
+|none = test| H2DB| Y|3306|qualibrate(auto created)|
+|none = dev| MySQL| Y|3306|qualibrate|
+|none = prod| MySQL| N|3306|qualibrate|
 
 
 
