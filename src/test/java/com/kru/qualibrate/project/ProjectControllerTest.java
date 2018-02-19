@@ -30,6 +30,7 @@ import com.kru.qualibrate.RestResponsePage;
  *         REST Controller Test Cases for Project Entity
  */
 
+@SuppressWarnings("unchecked")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProjectControllerTest extends ControllerTest {
 
@@ -59,8 +60,7 @@ public class ProjectControllerTest extends ControllerTest {
 			Project p = new Project.ProjectBuilder().active(false).code("PROJ-CODE-" + x)
 					.description("PROJ-Description-" + x).name("PROJ-NAME-" + x).build();
 			HttpEntity<Project> entity = new HttpEntity<Project>(p, headers);
-			ResponseEntity<ProjectDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/project"),
-					HttpMethod.POST, entity, ProjectDTO.class);
+			ResponseEntity<ProjectDTO> response = post("/api/v1/project", entity, ProjectDTO.class);
 			assertNotNull(response);
 			assertEquals(HttpStatus.CREATED, response.getStatusCode());
 		});
@@ -74,7 +74,8 @@ public class ProjectControllerTest extends ControllerTest {
 	@Test
 	public void bVerifyProjectGetCall() {
 		ResponseEntity<RestResponsePage<ProjectDTO>> response = restTemplate
-				.exchange(createURLWithPort("/api/v1/project?page=0&size=10"), HttpMethod.GET, entity, responseType);
+				.exchange(createURLWithPort("/api/v1/project?page=0&size=10"),
+						HttpMethod.GET, entity, responseType);
 		responseType = new ParameterizedTypeReference<RestResponsePage<ProjectDTO>>() {
 		};
 
@@ -92,7 +93,8 @@ public class ProjectControllerTest extends ControllerTest {
 	@Test
 	public void cVerifyProjectGetForEmptyResponse() {
 		ResponseEntity<RestResponsePage<ProjectDTO>> response = restTemplate
-				.exchange(createURLWithPort("/api/v1/project?page=100&size=100"), HttpMethod.GET, entity, responseType);
+				.exchange(createURLWithPort("/api/v1/project?page=100&size=100"),
+						HttpMethod.GET, entity, responseType);
 		responseType = new ParameterizedTypeReference<RestResponsePage<ProjectDTO>>() {
 		};
 
@@ -108,11 +110,11 @@ public class ProjectControllerTest extends ControllerTest {
 	 */
 	@Test
 	public void dVerifyContraintViolation() {
-		Project p = new Project.ProjectBuilder().active(false).code("PROJ-CODE-100").description("PROJ-Description-100")
+		Project p = new Project.ProjectBuilder().active(false).code("PROJ-CODE-100")
+				.description("PROJ-Description-100")
 				.name("PROJ-NAME-100").build();
 		HttpEntity<Project> entity = new HttpEntity<Project>(p, headers);
-		ResponseEntity<ProjectDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/project"),
-				HttpMethod.POST, entity, ProjectDTO.class);
+		ResponseEntity<ProjectDTO> response = post("/api/v1/project", entity, ProjectDTO.class);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 		// cause Unique Constraint Violation
 		response = restTemplate.exchange(createURLWithPort("/api/v1/project"), HttpMethod.POST, entity,
@@ -129,8 +131,7 @@ public class ProjectControllerTest extends ControllerTest {
 		Project p = new Project.ProjectBuilder().active(false).code("PROJ-CODE-100").description("PROJ-Description-100")
 				.build(); // missing project name in request
 		HttpEntity<Project> entity = new HttpEntity<Project>(p, headers);
-		ResponseEntity<ProjectDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/project"),
-				HttpMethod.POST, entity, ProjectDTO.class);
+		ResponseEntity<ProjectDTO> response = post("/api/v1/project", entity, ProjectDTO.class);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 	}
 }

@@ -1,9 +1,9 @@
 
-
+---
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/qualibrate?useSSL=false&rewriteBatchedStatement=trye&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://dbHost:3306/qualibrate?useSSL=false&rewriteBatchedStatement=trye&useUnicode=true&characterEncoding=utf8
     username: root
     password: "root"
     validation-query: SELECT 1
@@ -13,6 +13,18 @@ spring:
       dialect: org.hivernate.dialect.MySQL5Dialect
       ddl-auto: none
     show-sql: false
+---
+spring:
+  profiles: production
+liquibase:
+  contexts: production    
+---
+spring:
+  profiles: dev
+  jpa:
+    show-sql: true
+liquibase:
+  contexts: dev
 ---
 spring:
   profiles: test
