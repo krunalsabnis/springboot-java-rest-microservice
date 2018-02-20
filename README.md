@@ -2,7 +2,9 @@
 
 This is a Demo Microservice REST APIs written in Java 8 using Spring Boot.
 It tries to follow API maturity model Level 3 using Swagger and asciidoc for API documentation.
-Integration test using JUnit and H2DB for "test" profile. (No Mocks !)
+Integration test using JUnit and H2DB for "test" profile. (No Mocks)
+This project runs on docker and also brings up portainer for docker environment management.
+
 
 CI/CD : Using Travis for CI/CD : (Currently it runs build only (no deployment) on every commit and merge.)
 
@@ -64,7 +66,7 @@ You should be able to see build progress on console. Once done the build docker 
 
 This app can be run in two ways.
 
-###1. Run in local setup
+##1. Run in local setup
 You need a local instance of MySQL running on port 3306 and should have database created with name as "qualibrate"
 
 ```
@@ -72,7 +74,7 @@ You need a local instance of MySQL running on port 3306 and should have database
 
 ```
 
-###2. Docker Compose for [MySQL, Spring Boot App, nginx]
+##2. Docker Compose for [MySQL, Spring Boot App, nginx]
 
  - MySQL container
  - Spring Boot container
@@ -84,11 +86,12 @@ You need a local instance of MySQL running on port 3306 and should have database
 > docker-compose up
 
 ```
-## Once containers are up you can access APIs as below
+## - Once containers are up you can access below URLs
 
-## API Base URL 	:  http://localhost:8080
-## Swagger Page	:  http://localhost:8080/swagger-ui.html
+## API Host 		:  http://localhost:8080
+## Swagger Page		:  http://localhost:8080/swagger-ui.html
 ## API Documents	:  http://localhost:8085
+## Portainer		:  http://localhost:9000	[Docker Environment Management]
 
 
 
