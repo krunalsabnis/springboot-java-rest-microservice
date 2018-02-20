@@ -1,5 +1,14 @@
 version: '3'
 
+networks:
+  qualibrate:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.3.0.0/16
+          
+
+
 services: 
   api-doc-ngnix:
     build:
@@ -9,6 +18,10 @@ services:
       - qualibrate-rest-api-dev
     ports:
       - 8085:80
+    networks:
+      qualibrate:
+        aliases:
+          - web.qualibrate.com
 
   qualibrate-rest-api-dev:
     build:
@@ -21,9 +34,18 @@ services:
     environment:
       - DBHOST=docker-mysql
       - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      qualibrate:
+        aliases:
+          - api.qualibrate.com  
+      
   docker-mysql:
     image: mysql:5.7.21
     hostname: docker-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=qualibrate
+    networks:
+      qualibrate:
+        aliases:
+          - db.qualibrate.com  
