@@ -1,0 +1,4 @@
+# this is added to keep EOL to LF in any case.
+# On windows auto converting to CRLF and docker (linux) was breaking shell script
+
+*.sh text eol=lf

@@ -14,8 +14,6 @@ services:
     build:
       context: .
       dockerfile: ApiDocDockerfile
-    links:
-      - qualibrate-rest-api-dev
     ports:
       - 8085:80
     networks:
