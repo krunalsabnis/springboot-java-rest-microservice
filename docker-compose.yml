@@ -21,16 +21,27 @@ services:
         aliases:
           - web.qualibrate.com
 
-  qualibrate-rest-api-dev:
+  qualibrate-rest-api:
     build:
       context: .
       dockerfile: ApiDockerfile
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 400M
+      restart_policy:
+        condition: on-failure
     links:
       - "docker-mysql:dbHost"
+    volumes:
+      - E:\code-repo\qualibrate-java-api\scripts\pinpoint-agent-1.7.0:/pinpoint-agent-1.7.0/
     ports:
       - 8080:8080
     environment:
-      - DBHOST=docker-mysql
+      - DBHOST=db.qualibrate.com
+      - WAIT_FOR_DB=5
     networks:
       qualibrate:
         aliases:
@@ -39,6 +50,13 @@ services:
   docker-mysql:
     image: mysql:5.7.21
     hostname: docker-mysql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 400M
+      restart_policy:
+        condition: on-failure    
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=qualibrate
@@ -59,3 +77,7 @@ services:
       qualibrate:
         aliases:
           - portainer.qualibrate.com
+
+      qualibrate:
+        aliases:
+          - pinpoint-agent.qualibrate.com      

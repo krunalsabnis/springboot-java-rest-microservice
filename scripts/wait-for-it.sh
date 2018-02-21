@@ -1,12 +1,11 @@
 #!/bin/bash
 # 
-# Thank To  https://github.com/vishnubob/wait-for-it
+# Thanks To  https://github.com/vishnubob/wait-for-it
 # using this utility to wait for DB service to comeup.
 # Docker Compose's depends_on waits for container to comeup and not the 
 # services withing container. using this to listen DB port and wait.
 #
 #   Use this script to test if a given TCP host/port are available
-echo "here ---"
 cmdname=$(basename $0)
 
 echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
