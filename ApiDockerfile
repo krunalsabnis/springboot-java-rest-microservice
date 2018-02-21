@@ -1,17 +1,21 @@
-FROM java:8
+FROM krunalsabnis/pinpoint-spring-boot:0.0.6
 
-#VOLUME /tmp
+# expose port for APIs
 
 EXPOSE 8080
-ENV DBHOST=$DBHOST
-COPY /build/libs/qualibrate-java-api-*.jar app.jar
+
+COPY /build/libs/qualibrate-java-api-*.jar /app.jar
 COPY /scripts/wait-for-it.sh /wait-for-it.sh
 COPY /scripts/run.sh /run.sh
-COPY /scripts/pinpoint-bootstrap-1.7.0.jar /pinpoint-bootstrap-1.7.0.jar
+
+# set pinpoint agent jar path and version
+
+ENV PP_AGENT_ID java-api-agent
+ENV PP_APP_NAME qualibrate-java-api
+
 RUN chmod +x /run.sh
+
+# wait-for-it to wait for dependent service to start
 RUN chmod +x /wait-for-it.sh
-#RUN chmod +x $PATH/wait-for-db.sh
-CMD echo "DB-HOST ====@################### "$DBHOST DBHOST
-#CMD sleep 1000
-#ENTRYPOINT ["/wait-for-it.sh", "$DBHOST:3306","--","java","-jar","app.jar"]
+
 ENTRYPOINT ["/run.sh"]
