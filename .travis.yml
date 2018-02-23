@@ -11,6 +11,7 @@ deploy:
   app: "qualibrate-java-api"
   env: "qualibrate-java-api-qa"
   bucket_name: "elasticbeanstalk-us-east-1-584209658113"
+  zip_file: 'build/libs/qualibrate-java-api-0.0.1-SNAPSHOT.jar'
   on:
     branch: master
 
