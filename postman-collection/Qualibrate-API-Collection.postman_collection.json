@@ -1,0 +1,224 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Qualibrate-API-Collection",
+		"_postman_id": "1ca62cf3-faaa-808d-c86e-cab06dac719e",
+		"description": "This postman collection is for testing qualibrate APIs \nGitHub: https://github.com/krunalsabnis/qualibrate-java-api.git\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All User",
+			"request": {
+				"url": {
+					"raw": "{{api-url}}/api/v1/user?page=0&size=30",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "30",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get Paginated list of Users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/{{userid}}/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/{{userid}}/",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"W\",\r\n  \"lastName\": \"Smith\",\r\n  \"email\": \"wsmith@email.com\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"W\",\r\n  \"lastName\": \"Smith\",\r\n  \"email\": \"wsmith@email.com\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/24",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"activatedAt\": \"2018-02-23T09:01:08.364Z\",\r\n  \"active\": true,\r\n  \"email\": \"new-email@gmail.com\",\r\n  \"firstName\": \"updatedname\",\r\n  \"lastName\": \"Smith\",\r\n  \"loginAt\": \"2018-02-23T09:01:08.364Z\",\r\n  \"logoutAt\": \"2018-02-23T09:01:08.364Z\",\r\n  \"provider\": \"string\",\r\n  \"timestamp\": \"2018-02-23T09:01:08.364Z\",\r\n  \"uid\": \"string\",\r\n  \"userId\": 24\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project For A User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/3/project",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Project to User",
+			"request": {
+				"url": "{{api-url}}/api/v1/user/4/project/9",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Projects",
+			"request": {
+				"url": "{{api-url}}/api/v1/project",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Projects (Paginated)",
+			"request": {
+				"url": {
+					"raw": "{{api-url}}/api/v1/project?page=0&size=11",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"project"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "11",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create A Project",
+			"request": {
+				"url": "{{api-url}}/api/v1/project",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"100\",\r\n  \"name\": \"CRM Project\",\r\n  \"description\": \"Automation suite for release 101-B\",\r\n  \"code\": \"PRJ-100\",\r\n  \"active\": \"true\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
