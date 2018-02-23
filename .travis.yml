@@ -5,11 +5,13 @@ jdk:
 deploy:
   provider: elasticbeanstalk
   access_key_id: $ACCESS_KEYID
-  secret_access_key:
-    secure: "$SECRET_ACCESSKEY"
+  secret_access_key: $SECRET_ACCESSKEY
   region: "us-east-1"  
   app: "qualibrate-java-api"
   env: "qualibrate-java-api-qa"
   bucket_name: "elasticbeanstalk-us-east-1-584209658113"
   on:
-branch: master
+    branch: master
+
+after_deploy:  "echo 'Application Deployed to Cloud'"
+  

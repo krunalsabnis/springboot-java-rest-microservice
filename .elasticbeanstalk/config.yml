@@ -1,11 +1,13 @@
 branch-defaults:
   master:
     environment: qualibrate-java-api-qa
+deploy:
+  artifact: build/libs/qualibrate-java-api-0.0.1-SNAPSHOT.jar
 global:
   application_name: qualibrate-java-api
   branch: null
   default_ec2_keyname: kru-qualibrate-api
-  default_platform: Docker 17.09.1-ce
+  default_platform: Java 8
   default_region: us-east-1
   include_git_submodules: true
   instance_profile: null
