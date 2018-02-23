@@ -6,7 +6,7 @@ This Microservice REST APIs are written in Java 8 using Spring Boot.
 It tries to follow API maturity model Level 3.
 Test cases are written in JUnit and executed with every build.
 Integration test using JUnit and H2DB for "test" profile.(No Mocks)
-This application is configured with PinPoint agent to send performance metrics to PinPoint collection.
+This application is configured with PinPoint agent to send performance metrics to PinPoint collector.
 
 This project is containerized so you can easily build and run with 2 commands or 1 command to bring the complete application stack up.
 
@@ -19,7 +19,7 @@ Application stack includes
 - MySQL instance: For production and default/dev profile application uses MySQL for test profile its H2DB, in-memory database
 
 
-CI/CD : Using Travis for CI/CD : (Currently it runs build only on every commit and merge.)
+CI/CD : Using Travis for CI/CD : Runs Build for each branch. From master it deploys to ElasticBeanstalk in AWS.
 
 ## Minimum Prerequisites
 
@@ -30,7 +30,6 @@ If you wish to build and run REST APIs on your host OS
 * MySQL 5.7.21 running on port 3306 with an existing DB schema as "qualibrate"
 
 Alternatively, you can use docker files from this repository and simple instructions below to build and run on docker. In that case you only need your docker environment up and running.
-
 
 
 ## Build
@@ -108,7 +107,21 @@ You need a local instance of MySQL running on port 3306 and should have database
 ```
 
 ##3. Real easy ? Pull the image from Docker Repository
-- in progress.
+1.	To bring complete stack up including pin point.
+Run below in project root directory:
+
+```
+>     cd prebuilt
+>	  docker-compse up
+```
+2.	Excluding pinpoint
+To exclude PinPoint and bring stack up with Portainer, MySQL, nginx and APIs
+
+```
+>     cd prebuilt
+>	  docker-compse –f cocker-compose up	# this will ignore overridden file for pinpoint
+
+```
 
 
 
@@ -121,9 +134,9 @@ You need a local instance of MySQL running on port 3306 and should have database
 ## PinPoint 		:  http://localhost:3080	[APM]
 
 
-![Alt text](/diagrams/pinpoint1.jpg?raw=true "Memory Usage for Heap and PermGen")
-![Alt text](/diagrams/pinpoint2.jpg?raw=true "CPU")
-![Alt text](/diagrams/pinpoint3.jpg?raw=true "Transaction and other stats")
+![Alt text](/images/pinpoint1.jpg?raw=true "Memory Usage for Heap and PermGen")
+![Alt text](/images/pinpoint2.jpg?raw=true "CPU")
+![Alt text](/images/pinpoint3.jpg?raw=true "Transaction and other stats")
 
 
 
