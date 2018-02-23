@@ -1,9 +1,11 @@
-FROM java:8
-
-VOLUME ./build
+FROM java:8u72-jre
 
 EXPOSE 8080
 
-ADD /libs/qualibrate-java-api-0.0.1-SNAPSHOT.jar app.jar
-CMD set SPRING_PROFILES_ACTIVE=test
-ENTRYPOINT ["java","-jar","app.jar"]
+ENV SPRING_PROFILES_ACTIVE=test
+
+COPY dockerized-run.sh /dockerized-run.sh
+COPY build/libs/quali*.jar /opt/app/server.jar
+CMD chmod +x /dockerized-run.sh
+
+ENTRYPOINT ["/dockerized-run.sh"]

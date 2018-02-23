@@ -1,11 +1,15 @@
 language: java
 jdk:
  - oraclejdk8
-env:
- - SPRING_PROFILES_ACTIVE=test  
+     
 deploy:
- provider: heroku
- api-key: 
-  secure: $HEROKU_API_KEY
- app: qualibrate-java-api
-
+  provider: elasticbeanstalk
+  access_key_id: $ACCESS_KEYID
+  secret_access_key:
+    secure: "$SECRET_ACCESSKEY"
+  region: "us-east-1"  
+  app: "qualibrate-java-api"
+  env: "qualibrate-java-api-qa"
+  bucket_name: "elasticbeanstalk-us-east-1-584209658113"
+  on:
+branch: master
