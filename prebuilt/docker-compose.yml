@@ -1,0 +1,76 @@
+version: '3'
+
+networks:
+  qualibrate:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.3.0.0/16
+
+
+services: 
+  api-doc-ngnix:
+    image: krunalsabnis/qualibrate-api-doc:latest
+    ports:
+      - 8085:80
+    networks:
+      qualibrate:
+        aliases:
+          - web.qualibrate.com
+
+  qualibrate-rest-api:
+    image: krunalsabnis/q-api:latest
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+      restart_policy:
+        condition: on-failure
+    links:
+      - "docker-mysql:dbHost"
+    ports:
+      - 8080:8080
+    environment:
+      - DBHOST=db.qualibrate.com
+      - WAIT_FOR_DB=5
+    networks:
+      qualibrate:
+        aliases:
+          - api.qualibrate.com  
+      
+  docker-mysql:
+    image: mysql:5.7.21
+    hostname: docker-mysql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 400M
+      restart_policy:
+        condition: on-failure    
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=qualibrate
+    networks:
+      qualibrate:
+        aliases:
+          - db.qualibrate.com
+
+  portainer:
+    container_name: qualibrate-monitor
+    image: portainer/portainer
+    restart: always
+    ports:
+     - '9000:9000'
+    volumes: 
+     - '/var/run/docker.sock:/var/run/docker.sock'
+    
+    networks:
+      qualibrate:
+        aliases:
+          - portainer.qualibrate.com
+
+      qualibrate:
+        aliases:
+          - pinpoint-agent.qualibrate.com      
