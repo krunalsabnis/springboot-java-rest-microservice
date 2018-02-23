@@ -1,0 +1,77 @@
+version: '3'
+
+networks:
+  qualibrate:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.3.0.0/16
+services:
+
+  pinpoint-hbase:
+    container_name: pinpoint-hbase
+    hostname: hbase
+    image: dawidmalina/pinpoint-hbase:1.7.0
+    restart: always
+    expose:
+      - "2181"
+      - "16010"
+    ports:
+      - "2181:2181"
+      - "16010:16010"
+    networks:
+      qualibrate:
+        aliases:
+          - pinpoint-hbase.qualibrate.com
+
+  pinpoint-collector:
+    container_name: pinpoint-collector
+    hostname: collector
+    image: dawidmalina/pinpoint-collector:1.7.0
+    restart: always
+    expose:
+      - "9994"
+      - "9995"
+      - "9996"
+    ports:
+      - "9994:9994"
+      - "9995:9995/tcp"
+      - "9996:9996/tcp"
+      - "9995:9995/udp"
+      - "9996:9996/udp"
+    environment:
+      HBASE_HOST: hbase
+      HBASE_PORT: 2181
+      COLLECTOR_TCP_PORT: 9994
+      COLLECTOR_UDP_STAT_LISTEN_PORT: 9995
+      COLLECTOR_UDP_SPAN_LISTEN_PORT: 9996
+      CLUSTER_ENABLE: 'false'
+      DISABLE_DEBUG: 'true'
+    links:
+      - pinpoint-hbase:hbase
+    networks:
+      qualibrate:
+        aliases:
+          - pinpoint-collector.qualibrate.com  
+
+  pinpoint-web:
+    container_name: pinpoint-web
+    hostname: web
+    image: dawidmalina/pinpoint-web:1.7.0
+    restart: always
+    expose:
+      - "8080"
+    ports:
+      - "3080:8080"
+    environment:
+      HBASE_HOST: hbase
+      HBASE_PORT: 2181
+      CLUSTER_ENABLE: 'false'
+      ADMIN_PASSWORD: admin123
+      DISABLE_DEBUG: 'true'
+    links:
+      - pinpoint-hbase:hbase
+    networks:
+      qualibrate:
+        aliases:
+          - pinpoint-web.qualibrate.com
