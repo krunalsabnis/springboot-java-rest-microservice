@@ -42,6 +42,11 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
 					}
 				],
 				"body": {},
@@ -101,6 +106,11 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
 					}
 				],
 				"body": {
@@ -134,9 +144,15 @@
 		{
 			"name": "Get Project For A User",
 			"request": {
-				"url": "{{api-url}}/api/v1/user/3/project",
+				"url": "{{api-url}}/api/v1/user/4/project",
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
+					}
+				],
 				"body": {},
 				"description": ""
 			},
@@ -147,7 +163,13 @@
 			"request": {
 				"url": "{{api-url}}/api/v1/user/4/project/9",
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
+					}
+				],
 				"body": {},
 				"description": ""
 			},
@@ -158,7 +180,13 @@
 			"request": {
 				"url": "{{api-url}}/api/v1/project",
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
+					}
+				],
 				"body": {},
 				"description": ""
 			},
@@ -194,7 +222,13 @@
 					"variable": []
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
+					}
+				],
 				"body": {},
 				"description": ""
 			},
@@ -209,6 +243,11 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
 						"description": ""
 					}
 				],
