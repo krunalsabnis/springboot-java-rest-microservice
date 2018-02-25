@@ -34,8 +34,6 @@ services:
         condition: on-failure
     links:
       - "docker-mysql:dbHost"
-    volumes:
-      - E:\code-repo\qualibrate-java-api\scripts\pinpoint-agent-1.7.0:/pinpoint-agent-1.7.0/
     ports:
       - 8080:8080
     environment:
