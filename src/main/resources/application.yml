@@ -14,7 +14,7 @@ spring:
       ddl-auto: none
     show-sql: true
 
-secure.admin.password: $2a$10$fIaqF6RfXomPsaqQDhGYVeYhUjzPrEOGmGKli4oATLRgvQirffw6i
+secure.admin.password: $2a$10$n22CbmnyNEKOoIPgZl9fEuOyQ5pdmc1lSKHqPACQa4k7rQQrIESCi
 ---
 spring:
   datasource:

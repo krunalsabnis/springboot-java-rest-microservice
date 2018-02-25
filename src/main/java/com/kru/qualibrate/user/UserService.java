@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,8 +60,9 @@ public class UserService {
 		return userConverter.convert(user);
 	}
 
-	@Transactional
+	
 	@PreAuthorize("hasRole('ADMIN')")
+	@Transactional
 	public User createUser(User user) {
 		UserRecord saved;
 		try {
@@ -73,8 +75,9 @@ public class UserService {
 		return userConverter.convert(saved);
 	}
 
-	@Transactional
+
 	@PreAuthorize("hasRole('ADMIN')")
+	@Transactional
 	public void deleteUser(Long id) {
 		if (userRepository.exists(id))
 			userRepository.delete(id);

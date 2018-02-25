@@ -36,15 +36,15 @@ public class UserControllerTest extends ControllerTest {
 	
 	@Autowired
 	UserService userService;
-	
+
 	HttpHeaders headers;
 	HttpEntity<String> entity;
 	ParameterizedTypeReference<RestResponsePage<UserDTO>> responseType;
 	
 	@Before
 	public void setUp() {
+		headers = getHeaders();
 		responseType = new ParameterizedTypeReference<RestResponsePage<UserDTO>>(){};
-    	headers = new HttpHeaders();
     	entity = new HttpEntity<String>(null, headers);
 	}
     
@@ -118,7 +118,7 @@ public class UserControllerTest extends ControllerTest {
 				.lastName("Sabnis")
 				.email("email@test.com")
                 .build();
-		HttpEntity<User> entity = new HttpEntity<User>(u, headers);
+		HttpEntity<User> entity = new HttpEntity<User>(u, getHeaders());
 		ResponseEntity<UserDTO> response = post("/api/v1/user", entity, UserDTO.class);
 		/*ResponseEntity<UserDTO> response = restTemplate.exchange(createURLWithPort("/api/v1/user"),
         		HttpMethod.POST, entity, UserDTO.class);*/
