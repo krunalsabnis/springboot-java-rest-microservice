@@ -134,9 +134,8 @@ To exclude PinPoint and bring stack up with Portainer, MySQL, nginx and APIs
 ## PinPoint 		:  http://localhost:3080	[APM]
 
 
-![Alt text](/images/pinpoint1.jpg?raw=true "Memory Usage for Heap and PermGen")
-![Alt text](/images/pinpoint2.jpg?raw=true "CPU")
-![Alt text](/images/pinpoint3.jpg?raw=true "Transaction and other stats")
+![Alt text](/images/swagger-1.jpg?raw=true "Swagger Page Screen Shot")
+![Alt text](/images/swagger-2.jpg?raw=true "Swagger Page Screen Shot")
 
 
 
