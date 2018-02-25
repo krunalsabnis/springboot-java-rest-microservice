@@ -45,7 +45,7 @@ public class ProjectControllerTest extends ControllerTest {
 	public void setUp() {
 		responseType = new ParameterizedTypeReference<RestResponsePage<ProjectDTO>>() {
 		};
-		headers = new HttpHeaders();
+		headers = getHeaders();
 		entity = new HttpEntity<String>(null, headers);
 	}
 

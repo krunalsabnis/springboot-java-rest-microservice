@@ -17,6 +17,7 @@ buildscript {
         classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.7'
         classpath 'se.transmode.gradle:gradle-docker:1.2' 
+        classpath 'commons-codec:commons-codec:1.9'
 	}
 }
 
@@ -73,14 +74,17 @@ dependencies {
 	runtime 'mysql:mysql-connector-java:6.0.4'
 	runtime 'com.h2database:h2:1.4.190'
 
+
+    
+    compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-web'
-    compile "org.asciidoctor:asciidoctor-gradle-plugin:1.5.7"
+    compile 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.7'
     
     //asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:1.5.7'
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.2.1.RELEASE'
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile group: 'org.springframework.restdocs', name: 'spring-restdocs-core', version: '1.2.1.RELEASE'
+    testCompile 'org.springframework.restdocs:spring-restdocs-core:1.2.1.RELEASE'
 }
 
 

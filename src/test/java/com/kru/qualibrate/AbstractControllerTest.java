@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Charsets;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -59,11 +62,12 @@ public abstract class AbstractControllerTest extends QualibrateJavaApiApplicatio
 
     @Before
     public void setupMvcMock() {
+        String basicAuth = new String(Base64.encode("admin:admin@2018".getBytes(Charsets.UTF_8)), Charsets.UTF_8);
 
         headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + "base64CredentialsHere");
+        headers.add("Authorization", "Basic " + basicAuth);
         headers.add("Accept", "application/json");
-        headers.add("Accept", "application/json");
+        headers.add("Accept", "text/plain");
 
         this.document = document("{class-name}/{method-name}/{step}",
                 preprocessRequest(prettyPrint(), removeHeaders("Authorization")),

@@ -13,6 +13,8 @@ spring:
       dialect: org.hivernate.dialect.MySQL5Dialect
       ddl-auto: none
     show-sql: true
+
+secure.admin.password: $2a$10$n22CbmnyNEKOoIPgZl9fEuOyQ5pdmc1lSKHqPACQa4k7rQQrIESCi
 ---
 spring:
   datasource:
