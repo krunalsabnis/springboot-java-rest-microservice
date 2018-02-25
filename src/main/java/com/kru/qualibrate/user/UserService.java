@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +51,7 @@ public class UserService {
 		return userRepository.findAll(pageable).map(userConverter);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	public UserDTO getUser(Long id) {
 		UserRecord user = userRepository.findOne(id);
 		if (user == null)
@@ -58,6 +60,7 @@ public class UserService {
 	}
 
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public User createUser(User user) {
 		UserRecord saved;
 		try {
@@ -71,6 +74,7 @@ public class UserService {
 	}
 
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteUser(Long id) {
 		if (userRepository.exists(id))
 			userRepository.delete(id);
@@ -80,6 +84,7 @@ public class UserService {
 
 
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public UserDTO updateUser(Long id, UserDTO userDto) {
 		if (userDto.getUserId() != null && userDto.getUserId() != id)
 			throw new InvalidRequestException("unexpected userId in request body : " + userDto.getUserId());
@@ -91,6 +96,7 @@ public class UserService {
 		return userConverter.convert(userRepository.save(userRecord));
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<ProjectDTO> getProjectFor(Long id) {
 		List<ProjectDTO> list = new ArrayList<ProjectDTO>();
 		getUser(id).getProjects().forEach(x -> list.add(projectConverter.convert(x)));
@@ -98,6 +104,7 @@ public class UserService {
 	}
 
 
+	@PreAuthorize("hasRole('ADMIN')")
 	public ProjectDTO assignProject(Long userId, Long projectId) {
 		if (!userRepository.exists(userId))
 			throw new ResourceNotFoundException("User not found");

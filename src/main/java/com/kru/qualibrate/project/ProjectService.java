@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,7 @@ public class ProjectService {
 		return projectRepo.findAll(pageable).map(projectConverter);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Transactional
 	public ProjectDTO createProject(Project project) {
 		ProjectRecord saved;
@@ -48,6 +50,7 @@ public class ProjectService {
 		return projectConverter.convert(saved);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Transactional
 	public ProjectDTO assignToUser(Long userId, Long projectId) {
 		ProjectRecord p = findOne(projectId);
