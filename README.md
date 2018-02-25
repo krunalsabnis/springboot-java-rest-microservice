@@ -1,5 +1,5 @@
 # Qaulibrate API 2.0 
-![Build Status](https://travis-ci.org/krunalsabnis/qualibrate-java-api.svg?branch=master)
+[![Build Status](https://travis-ci.org/krunalsabnis/qualibrate-java-api.svg?branch=master)](https://travis-ci.org/krunalsabnis/qualibrate-java-api)
 
 
 This Microservice REST APIs are written in Java 8 using Spring Boot.
