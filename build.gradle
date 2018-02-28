@@ -14,7 +14,6 @@ buildscript {
 	dependencies {
 		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 		classpath 'org.asciidoctor:asciidoctorj:1.5.3'
-		compile 'org.web3j:web3j-spring-boot-starter:1.0.0'
         classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.7'
         classpath 'se.transmode.gradle:gradle-docker:1.2' 
