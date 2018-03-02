@@ -8,3 +8,5 @@
         file: db/changelog/changelog-03-projectdata-load-for-test.yaml
     - include:
         file: db/changelog/changelog-04-userdata-load-for-test.yaml
+    - include:
+        file: db/changelog/changelog-05-create-table-eth-response-log.yaml
