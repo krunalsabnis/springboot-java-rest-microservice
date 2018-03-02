@@ -1,0 +1,25 @@
+  databaseChangeLog:
+  - changeSet:
+      id: eth-log-table-create
+      author: krunalsabnis@gmail.com
+      changes:
+      - createTable:
+          tableName: eth_log
+          columns:
+          - column:
+              constraints:
+                primaryKey: true
+              name: id
+              type: BIGINT
+              autoIncrement: true
+          - column:
+              name: transaction
+              type: VARCHAR(20)
+          - column:
+              name: response
+              type: TEXT
+          - column:
+              name: timestamp
+              type: DATETIME
+              defaultValueComputed: CURRENT_TIMESTAMP
+
