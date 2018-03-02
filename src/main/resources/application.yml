@@ -17,7 +17,7 @@ spring:
 secure.admin.password: $2a$10$n22CbmnyNEKOoIPgZl9fEuOyQ5pdmc1lSKHqPACQa4k7rQQrIESCi
 
 eth:
- url: localhost:8545
+ url: https://ropsten.infura.io/F5WXWMRcN0kK6TKsh4sh
 
 ---
 spring:
