@@ -69,13 +69,6 @@ public class EthController {
     }
 
     @ApiOperation(value = "Get Client Details", notes = "Get Eth Client Details")
-    @RequestMapping(method = RequestMethod.GET, value = "/transact")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TransactionReceipt> transact() throws Exception {
-        return ResponseEntity.ok(web3Service.transact("/api/v1/user"));
-    }
-
-    @ApiOperation(value = "Get Client Details", notes = "Get Eth Client Details")
     @RequestMapping(method = RequestMethod.GET, value = "/getCount")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> getC() {
