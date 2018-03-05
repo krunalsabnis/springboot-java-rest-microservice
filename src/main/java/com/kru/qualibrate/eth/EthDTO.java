@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.eth;
 
 import java.util.Date;
@@ -17,19 +14,19 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class EthDTO {
-	private long id;
+    private long id;
 
-	private String transaction;
+    private String transaction;
 
-	private String response;
+    private String response;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date timestamp = new Date();
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date timestamp = new Date();
 
     public EthDTO(String transaction, String response) {
-    	this.transaction = transaction;
-    	this.response = response;
-    	this.timestamp =  new Date();
-    	
+        this.transaction = transaction;
+        this.response = response;
+        this.timestamp =  new Date();
+
     }
 }

@@ -1,12 +1,7 @@
-/**
- * 
- */
 package com.kru.qualibrate.config;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
@@ -25,7 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
  *
  * Configuration class for customizing Swagger Page Docket
- * 
  * reference : https://github.com/springfox/springfox/issues/755
  */
 
@@ -33,8 +27,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
-    
-	@Component
+
+    @Component
     @Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER)
     public static class PageableParameterBuilder implements ParameterBuilderPlugin {
 

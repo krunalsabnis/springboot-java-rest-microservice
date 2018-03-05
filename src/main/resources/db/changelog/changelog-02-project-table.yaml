@@ -28,7 +28,7 @@
               type: VARCHAR(20)
           - column:
               constraints:
-                nullable: false 
+                nullable: false
               name: active
               type: boolean
           - column:
@@ -49,4 +49,3 @@
             columnNames: code
             constraintName: unique-code-constraint
             tableName: project
-              

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate;
 
 import org.springframework.context.annotation.Bean;
@@ -17,15 +14,16 @@ import com.kru.qualibrate.eth.ApiCallInterceptor;
  *
  */
 @org.springframework.context.annotation.Configuration
-public class CallInterceptorConfig extends WebMvcConfigurerAdapter{
-	@Bean
-	public ApiCallInterceptor apiCallInterceptor() {
-	    return new ApiCallInterceptor();
-	}
+public class CallInterceptorConfig extends WebMvcConfigurerAdapter {
+    @Bean
+    public ApiCallInterceptor apiCallInterceptor() {
+        return new ApiCallInterceptor();
+    }
 
-	@Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(apiCallInterceptor()).addPathPatterns("/api/v1/**", "/api/v1/**/**", "/api/v1/**/**/**")
-       .excludePathPatterns("/api/v1/eth/**");
+        registry.addInterceptor(apiCallInterceptor())
+            .addPathPatterns("/api/v1/**", "/api/v1/**/**", "/api/v1/**/**/**")
+            .excludePathPatterns("/api/v1/eth/**");
     }
 }

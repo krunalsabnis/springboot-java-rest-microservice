@@ -1,13 +1,12 @@
-/**
- * 
- */
 package com.kru.qualibrate.commons;
+
+import java.lang.reflect.Field;
+import java.util.Collection;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-import java.lang.reflect.Field;
-import java.util.Collection;
+
 
 /**
  * A utility to copy properties from one object to another.

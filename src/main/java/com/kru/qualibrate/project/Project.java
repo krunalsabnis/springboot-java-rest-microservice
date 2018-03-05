@@ -1,11 +1,7 @@
-/**
- * 
- */
 package com.kru.qualibrate.project;
 
-
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -23,29 +19,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Project {
 
-	@ApiModelProperty(name = "id", dataType = "String", required = false,
-	    notes = "Unique identifier", example = "1")
-	private Long id;
+    @ApiModelProperty(name = "id", dataType = "String", required = false,
+            notes = "Unique identifier", example = "1")
+    private Long id;
 
-	@NotNull
-	@Size(min = 1, max = 20)
-	@ApiModelProperty(name = "name", dataType = "String", required = true,
-	    notes = "Project name", example = "CRM Project")
-	private String name;
-	
-	@Size(min = 1, max = 100)
-	@ApiModelProperty(name = "description", dataType = "String", required = false,
-	    notes = "Details about project content", example = "Automation suite for release 101-B")
-	private String description;
+    @NotNull
+    @Size(min = 1, max = 20)
+    @ApiModelProperty(name = "name", dataType = "String", required = true,
+        notes = "Project name", example = "CRM Project")
+    private String name;
 
-	@Size(min = 0, max = 20)
-	@ApiModelProperty(name = "code", dataType = "String", required = false,
-	    notes = "Generic identifier", example = "PRJ-001")
-	private String code;
+    @Size(min = 1, max = 100)
+    @ApiModelProperty(name = "description", dataType = "String", required = false,
+        notes = "Details about project content", example = "Automation suite for release 101-B")
+    private String description;
+
+    @Size(min = 0, max = 20)
+    @ApiModelProperty(name = "code", dataType = "String", required = false,
+        notes = "Generic identifier", example = "PRJ-001")
+    private String code;
 
 
-	@ApiModelProperty(name = "active", dataType = "String", required = false,
-		    notes = "In archive?", example = "true/false")
-	private boolean active;
+    @ApiModelProperty(name = "active", dataType = "String", required = false,
+            notes = "In archive?", example = "true/false")
+    private boolean active;
 
 }

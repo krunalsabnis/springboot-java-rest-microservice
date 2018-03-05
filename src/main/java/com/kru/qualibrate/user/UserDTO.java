@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.user;
 
 import java.util.Date;
@@ -26,30 +23,30 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(value=Include.NON_NULL)
+@JsonInclude(value = Include.NON_NULL)
 public class UserDTO extends User {
 
-	protected Long userId;
+    protected Long userId;
 
-	private boolean active;
+    private boolean active;
 
-	private String uid;
+    private String uid;
 
-	private String provider;
+    private String provider;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date activatedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date activatedAt;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date loginAt;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date logoutAt;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date timestamp;
-	
-	@JsonIgnore
-	private Set<ProjectRecord> projects;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date loginAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date logoutAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date timestamp;
+
+    @JsonIgnore
+    private Set<ProjectRecord> projects;
 
 }

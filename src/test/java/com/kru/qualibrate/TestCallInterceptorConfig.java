@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate;
 
 import org.mockito.Mockito;
@@ -21,19 +18,20 @@ import com.kru.qualibrate.eth.ContractService;
  */
 @Profile({ "test" })
 @org.springframework.context.annotation.Configuration
-public class TestCallInterceptorConfig extends WebMvcConfigurerAdapter{
+public class TestCallInterceptorConfig extends WebMvcConfigurerAdapter {
 
-	@Bean
-	ContractService contractService() {
-		return Mockito.mock(ContractService.class);
-	}
+    @Bean
+    ContractService contractService() {
+        return Mockito.mock(ContractService.class);
+    }
 
-	@Bean
-	ApiCallInterceptor apiCallInterceptor() {
-		return Mockito.mock(ApiCallInterceptor.class);
-	}
-	@Override
+    @Bean
+    ApiCallInterceptor apiCallInterceptor() {
+        return Mockito.mock(ApiCallInterceptor.class);
+    }
+
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(apiCallInterceptor()).addPathPatterns("/api/v1/user", "/api/v1/project");
+        registry.addInterceptor(apiCallInterceptor()).addPathPatterns("/api/v1/user", "/api/v1/project");
     }
 }

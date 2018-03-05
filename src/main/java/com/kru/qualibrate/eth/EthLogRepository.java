@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.eth;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  */
 public interface EthLogRepository extends JpaRepository<EthLogRecord, Long> {
-	Page<EthLogRecord> findAll(Pageable pageable);
+    Page<EthLogRecord> findAll(Pageable pageable);
 
 }

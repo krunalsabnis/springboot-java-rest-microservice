@@ -49,7 +49,7 @@ public class ContractService {
 
     private static final String WALLET_PASSWORD = "ether@2018";
 
-    private final ApiContract_sol_ApiContract contract;
+    private final ApiContractSol contract;
 
     private Credentials credentials;
 
@@ -62,9 +62,9 @@ public class ContractService {
         this.ethLogService = ethLogService;
         File file;
         try {
-        	file = ResourceToFile.getResourceAsFile(WALLET_FILE);
+            file = ResourceToFile.getResourceAsFile(WALLET_FILE);
             this.credentials = WalletUtils.loadCredentials(WALLET_PASSWORD, file);
-            this.contract = ApiContract_sol_ApiContract.load(CONTRACT_ADD, web3j,
+            this.contract = ApiContractSol.load(CONTRACT_ADD, web3j,
                 credentials, BigInteger.valueOf((long) 1), BigInteger.valueOf((long) 21000));
         } catch (IOException | CipherException e) {
             log.error("error initializing eth services {}", e.getMessage());

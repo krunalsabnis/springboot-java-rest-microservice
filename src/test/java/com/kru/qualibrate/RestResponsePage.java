@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate;
 
 import java.util.ArrayList;
@@ -14,26 +11,26 @@ import org.springframework.data.domain.Pageable;
  *
  */
 
-public class RestResponsePage<T> extends PageImpl<T>{
+public class RestResponsePage<T> extends PageImpl<T> {
 
-  private static final long serialVersionUID = 3248189030448292002L;
+    private static final long serialVersionUID = 3248189030448292002L;
 
-  public RestResponsePage(List<T> content, Pageable pageable, long total) {
-    super(content, pageable, total);
-  }
+    public RestResponsePage(List<T> content, Pageable pageable, long total) {
+      super(content, pageable, total);
+    }
 
-  public RestResponsePage(List<T> content) {
-    super(content);
-  }
+    public RestResponsePage(List<T> content) {
+      super(content);
+    }
 
-  /* PageImpl does not have an empty constructor and this was 
-   * causing an issue for RestTemplate to cast the Rest API response
-   * back to Page.
-   * 
-   * reference : https://stackoverflow.com/questions/34647303/spring-resttemplate-with-paginated-api
-   */
-  public RestResponsePage() {
-    super(new ArrayList<T>());
-  }
+    /* PageImpl does not have an empty constructor and this was
+     * causing an issue for RestTemplate to cast the Rest API response
+     * back to Page.
+     *
+     * reference : https://stackoverflow.com/questions/34647303/spring-resttemplate-with-paginated-api
+     */
+    public RestResponsePage() {
+        super(new ArrayList<T>());
+    }
 
-} 
+}

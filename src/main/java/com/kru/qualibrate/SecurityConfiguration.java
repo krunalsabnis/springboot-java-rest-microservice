@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value("${secure.admin.password}")
     private String adminPassword;
-    
+
     public SecurityConfiguration() {
         super(true);
     }
@@ -61,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .regexMatchers("/api/v[0-9]+/.*").hasAnyRole(ADMIN_ROLE);
 
     }
-    
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())

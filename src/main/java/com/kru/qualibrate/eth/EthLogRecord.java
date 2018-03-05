@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.eth;
 
 import java.util.Date;
@@ -20,23 +17,23 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@Entity(name="eth_log")
+@Entity(name = "eth_log")
 public class EthLogRecord {
-	@Id
-	@NotNull
-	@Column(name="id")
-	@GeneratedValue
-	private long id;
+    @Id
+    @NotNull
+    @Column(name = "id")
+    @GeneratedValue
+    private long id;
 
-	private String transaction;
+    private String transaction;
 
-	private String response;
+    private String response;
 
-	private Date timestamp = new Date();
+    private Date timestamp = new Date();
 
-	public EthLogRecord(EthDTO eth) {
-		this.transaction = eth.getTransaction();
-		this.response = eth.getResponse();
-		this.timestamp = eth.getTimestamp();		
-	}
+    public EthLogRecord(EthDTO eth) {
+        this.transaction = eth.getTransaction();
+        this.response = eth.getResponse();
+        this.timestamp = eth.getTimestamp();
+    }
 }
