@@ -1,11 +1,13 @@
 package com.kru.qualibrate.commons;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.core.io.ClassPathResource;
+
 
 /**
  * To read a File from Jar. using Spring reseourceLoader works well when
@@ -25,15 +27,7 @@ public class ResourceToFile {
             }
             File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
             tempFile.deleteOnExit();
-
-            try (FileOutputStream out = new FileOutputStream(tempFile)) {
-                //copy stream
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = in.read(buffer)) != -1) {
-                    out.write(buffer, 0, bytesRead);
-                }
-            }
+            Files.copy(in, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return tempFile;
         } catch (IOException e) {
             e.printStackTrace();
