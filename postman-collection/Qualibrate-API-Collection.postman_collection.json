@@ -55,6 +55,28 @@
 			"response": []
 		},
 		{
+			"name": "Get Ethereum Transaction Log",
+			"request": {
+				"url": "{{api-url}}/api/v1/eth/logs",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW5AMjAxOA==",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get Paginated Logs for Ethereum Transaction"
+			},
+			"response": []
+		},
+		{
 			"name": "Get a User",
 			"request": {
 				"url": "{{api-url}}/api/v1/user/{{userid}}/",
