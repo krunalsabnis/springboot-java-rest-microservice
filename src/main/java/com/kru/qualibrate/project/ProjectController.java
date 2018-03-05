@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.project;
 
 import javax.validation.Valid;
@@ -23,30 +20,30 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * @author <a href="mailto:krunalsabnis@gmail.com">Krunal Sabnis</a>
- * 
+ *
  * Controller for Project Entity
  */
 @Validated
 @RestController
 @RequestMapping("/api/v1/")
 @Api(description = "Project lifecycle and test asset administration",
-tags = "projects", consumes = "application/json")
+    tags = "projects", consumes = "application/json")
 public class ProjectController {
-	
-	@Autowired
-	private ProjectService projectService;
 
-	@ApiOperation(value = "Get List of Projects", notes = "Get Projects")
-	@RequestMapping(method = RequestMethod.GET, value = "/project")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Page<ProjectDTO>> getProject(@PageableDefault(value = 50) Pageable pageable) {
-		return ResponseEntity.ok(projectService.getProject(pageable));
-	}
+    @Autowired
+    private ProjectService projectService;
 
-	@ApiOperation(value = "Create a Project", notes = "Create Project")
-	@RequestMapping(method = RequestMethod.POST, value = "/project")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ProjectDTO createProject(@Valid @RequestBody Project project) {
-		return projectService.createProject(project);
-	}
+    @ApiOperation(value = "Get List of Projects", notes = "Get Projects")
+    @RequestMapping(method = RequestMethod.GET, value = "/project")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Page<ProjectDTO>> getProject(@PageableDefault(value = 50) Pageable pageable) {
+        return ResponseEntity.ok(projectService.getProject(pageable));
+    }
+
+    @ApiOperation(value = "Create a Project", notes = "Create Project")
+    @RequestMapping(method = RequestMethod.POST, value = "/project")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProjectDTO createProject(@Valid @RequestBody Project project) {
+        return projectService.createProject(project);
+    }
 }

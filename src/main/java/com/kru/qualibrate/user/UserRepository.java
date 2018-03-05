@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.user;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Data Access Layer for User
  */
 public interface UserRepository extends JpaRepository<UserRecord, Long> {
-	Page<UserRecord> findAll(Pageable pageable);
+    Page<UserRecord> findAll(Pageable pageable);
 
 }

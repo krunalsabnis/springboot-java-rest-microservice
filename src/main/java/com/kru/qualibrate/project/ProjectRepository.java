@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.project;
 
 import org.springframework.data.domain.Page;
@@ -13,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Data Access Layer for Project
  */
 public interface ProjectRepository extends JpaRepository<ProjectRecord, Long> {
-	Page<ProjectRecord> findAll(Pageable pageable);
+    Page<ProjectRecord> findAll(Pageable pageable);
 }

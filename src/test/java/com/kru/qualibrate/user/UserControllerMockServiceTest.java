@@ -37,9 +37,9 @@ public class UserControllerMockServiceTest extends AbstractControllerTest {
     }
 
     @SuppressWarnings("deprecation")
-	@Test
+    @Test
     public void getUsersList() throws Exception {
-    	document.snippets(
+        document.snippets(
                 responseFields(
                         fieldWithPath("content").description("Array of user records"),
                         fieldWithPath("content[].userId").description("User's unique identifier number"),
@@ -62,7 +62,8 @@ public class UserControllerMockServiceTest extends AbstractControllerTest {
                         fieldWithPath("content[].lastName")
                                 .description("Last name of the user"),
                         fieldWithPath("content[].email")
-                                .description("Email id of the user. There can not be more than one user with same email id"),
+                                .description("Email id of the user."
+                                         + " There can not be more than one user with same email id"),
                         fieldWithPath("totalElements")
                                 .description("Total number of elements in page"),
                         fieldWithPath("totalPages")
@@ -80,18 +81,18 @@ public class UserControllerMockServiceTest extends AbstractControllerTest {
                         fieldWithPath("numberOfElements")
                                 .description("Total number of elements")));
 
-    	when(userService.getUser(any(PageRequest.class))).thenReturn(getDummyUser());
+        when(userService.getUser(any(PageRequest.class))).thenReturn(getDummyUser());
         List<UserDTO> response = page(UserDTO.class, "?page=0&size=2");
 
         assertNotNull(response);
     }
-    
+
     private Page<UserDTO> getDummyUser() {
-		UserDTO u = new UserDTO(100L, false, "uid-0001", "provider",
-				new Date(), new Date(), new Date(), new Date(), null);
-		u.setFirstName("John");
-		u.setLastName("Smith");
-		u.setEmail("john.smith@email.com");
-		return new PageImpl<>(Arrays.asList(u));
+        UserDTO u = new UserDTO(100L, false, "uid-0001", "provider",
+                new Date(), new Date(), new Date(), new Date(), null);
+        u.setFirstName("John");
+        u.setLastName("Smith");
+        u.setEmail("john.smith@email.com");
+        return new PageImpl<>(Arrays.asList(u));
     }
 }

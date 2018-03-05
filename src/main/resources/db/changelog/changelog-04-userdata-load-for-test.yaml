@@ -24,8 +24,7 @@
               - column:
                    name: active
                    header: active
-                   type: boolean                   
+                   type: boolean
             encoding: UTF-8
             file: db/changelog/data/user-data-v1.csv
             tableName: user
- 

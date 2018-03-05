@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.kru.qualibrate.project;
 
 import java.util.Date;
@@ -18,11 +16,11 @@ import lombok.Setter;
 @Getter
 public class ProjectDTO extends Project {
 
-	private String icon;
+    private String icon;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Date timestamp;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date timestamp;
 
-	private Long userId;
+    private Long userId;
 
 }

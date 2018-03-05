@@ -84,7 +84,7 @@ public abstract class AbstractControllerTest extends QualibrateJavaApiApplicatio
 
         List<MockMvcConfigurer> configurers = getConfigurers();
         //if (CollectionUtils.isNotEmpty(configurers)) {
-            //configurers.forEach(builder::apply);
+        //configurers.forEach(builder::apply);
         //}
 
         mockMvc = builder.build();
@@ -130,9 +130,7 @@ public abstract class AbstractControllerTest extends QualibrateJavaApiApplicatio
     }
 
     protected <T> List<T> page(Class<T> clazz, Object... urlPaths) throws Exception {
-        
-
-    	RequestBuilder requestBuilder = MockMvcRequestBuilders.get(fullUrl(urlPaths)).headers(headers);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(fullUrl(urlPaths)).headers(headers);
         final MvcResult res = mockMvc.perform(requestBuilder).andExpect(status().isOk()).andReturn();
         return page(clazz, res);
     }

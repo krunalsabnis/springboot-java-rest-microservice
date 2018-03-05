@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.kru.qualibrate.eth;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +14,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  */
 public class ApiCallInterceptor extends HandlerInterceptorAdapter {
-	@Autowired
-	private ContractService contractService;
-	@Override
+    @Autowired
+    private ContractService contractService;
+
+    @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-    		Object handler, Exception exception)
-    throws Exception {
-		contractService.transact(request.getMethod() + ":" + request.getRequestURI());
+        Object handler, Exception exception) throws Exception {
+        contractService.transact(request.getMethod() + ":" + request.getRequestURI());
     }
 }

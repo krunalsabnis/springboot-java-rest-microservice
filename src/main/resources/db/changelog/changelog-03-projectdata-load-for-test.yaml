@@ -36,4 +36,3 @@
             encoding: UTF-8
             file: db/changelog/data/project-data-v1.csv
             tableName: project
- 
