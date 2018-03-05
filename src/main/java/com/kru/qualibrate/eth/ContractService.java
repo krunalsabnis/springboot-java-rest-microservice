@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -26,6 +25,7 @@ import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Numeric;
 
+import com.kru.qualibrate.commons.ResourceToFile;
 import com.kru.qualibrate.exceptions.EtheriumServiceException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +62,7 @@ public class ContractService {
         this.ethLogService = ethLogService;
         File file;
         try {
-            file = new ClassPathResource(WALLET_FILE).getFile();
+        	file = ResourceToFile.getResourceAsFile(WALLET_FILE);
             this.credentials = WalletUtils.loadCredentials(WALLET_PASSWORD, file);
             this.contract = ApiContract_sol_ApiContract.load(CONTRACT_ADD, web3j,
                 credentials, BigInteger.valueOf((long) 1), BigInteger.valueOf((long) 21000));
@@ -106,7 +106,7 @@ public class ContractService {
         } catch (Exception e) {
             ethLogService.save(new EthDTO(apiEP, e.getMessage()));
             log.error("error while creating transaction {}", e.getMessage());
-            throw new EtheriumServiceException(e.getMessage());
+            //throw new EtheriumServiceException(e.getMessage());
         }
         return receipt;
     }

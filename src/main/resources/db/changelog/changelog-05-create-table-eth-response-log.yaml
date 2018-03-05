@@ -14,7 +14,7 @@
               autoIncrement: true
           - column:
               name: transaction
-              type: VARCHAR(20)
+              type: TEXT
           - column:
               name: response
               type: TEXT

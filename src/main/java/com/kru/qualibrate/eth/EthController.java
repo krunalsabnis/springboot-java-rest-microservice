@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -61,26 +60,8 @@ public class EthController {
         return null;
     }
 
-    @ApiOperation(value = "Get Client Details", notes = "Get Contract Adress balance")
-    @RequestMapping(method = RequestMethod.GET, value = "/balance")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> getBalance() {
-        return ResponseEntity.ok(web3Service.getBalance());
-    }
 
-    @ApiOperation(value = "Get Client Details", notes = "Get Eth Client Details")
-    @RequestMapping(method = RequestMethod.GET, value = "/getCount")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> getC() {
-        try {
-            return ResponseEntity.ok(web3Service.getCount("/api/v1/user").toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @ApiOperation(value = "Deploy contract", notes = "deploy solidity contract")
+    @ApiOperation(value = "Deploy Solidity contract (experimental)", notes = "** Experimental **")
     @RequestMapping(method = RequestMethod.POST, value = "/deploy")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<String> deploy(@RequestBody Contract cont) {

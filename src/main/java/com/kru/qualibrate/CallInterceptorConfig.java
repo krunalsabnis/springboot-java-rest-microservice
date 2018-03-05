@@ -25,6 +25,7 @@ public class CallInterceptorConfig extends WebMvcConfigurerAdapter{
 
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(apiCallInterceptor()).addPathPatterns("/api/v1/user", "/api/v1/project");
+       registry.addInterceptor(apiCallInterceptor()).addPathPatterns("/api/v1/**", "/api/v1/**/**", "/api/v1/**/**/**")
+       .excludePathPatterns("/api/v1/eth/**");
     }
 }
