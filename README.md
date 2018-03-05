@@ -134,6 +134,11 @@ To exclude PinPoint and bring stack up with Portainer, MySQL, nginx and APIs
 ## PinPoint 		:  http://localhost:3080	[APM]
 
 
+
+This project use lombok, please install it into your IDE. For details
+https://projectlombok.org/download.html
+
+
 ![Alt text](/images/pinpoint1.jpg?raw=true "Memory Usage for Heap and PermGen")
 ![Alt text](/images/pinpoint2.jpg?raw=true "CPU")
 ![Alt text](/images/pinpoint3.jpg?raw=true "Transaction and other stats")
