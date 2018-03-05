@@ -23,6 +23,6 @@ public class ApiCallInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
     		Object handler, Exception exception)
     throws Exception {
-		contractService.transact(request.getRequestURI());
+		contractService.transact(request.getMethod() + ":" + request.getRequestURI());
     }
 }
