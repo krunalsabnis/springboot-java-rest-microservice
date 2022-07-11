@@ -3,6 +3,7 @@
 
 My Demo Spring Boot Micro Service
 - Java 8
+- API Interceptor which triggers Smart Contract on Etherium Test Network
 - JUnit Test Cases
 - Integration Tests using JUnit , H2DB (No Mocks)
 - Pinpoint for performance metric
