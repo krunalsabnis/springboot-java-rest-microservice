@@ -8,6 +8,8 @@ My Demo Spring Boot Micro Service
 - Integration Tests using JUnit , H2DB (No Mocks)
 - Pinpoint for performance metric
 - Containerized using Docker
+- ASCII Doc to gerenrate API Documentation as static HTML pages
+- Swagger Documentation
 
 
 This project is containerized so you can easily build and run with 2 commands or 1 command to bring the complete application stack up.
