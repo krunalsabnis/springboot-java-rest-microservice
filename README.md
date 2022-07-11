@@ -1,12 +1,13 @@
-# Qaulibrate API 2.0 
+# Demo REST API Micro Service  
 [![Build Status](https://travis-ci.org/krunalsabnis/qualibrate-java-api.svg?branch=master)](https://travis-ci.org/krunalsabnis/qualibrate-java-api)
 
+My Demo Spring Boot Micro Service
+- Java 8
+- JUnit Test Cases
+- Integration Tests using JUnit , H2DB (No Mocks)
+- Pinpoint for performance metric
+- Containerized using Docker
 
-This Microservice REST APIs are written in Java 8 using Spring Boot.
-It tries to follow API maturity model Level 3.
-Test cases are written in JUnit and executed with every build.
-Integration test using JUnit and H2DB for "test" profile.(No Mocks)
-This application is configured with PinPoint agent to send performance metrics to PinPoint collector.
 
 This project is containerized so you can easily build and run with 2 commands or 1 command to bring the complete application stack up.
 
