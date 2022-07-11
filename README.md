@@ -1,4 +1,4 @@
-# Demo REST API Micro Service  
+# Demo REST API Micro Service  Trigger Smart Contract on Etherium Test Network
 [![Build Status](https://travis-ci.org/krunalsabnis/qualibrate-java-api.svg?branch=master)](https://travis-ci.org/krunalsabnis/qualibrate-java-api)
 
 My Demo Spring Boot Micro Service
